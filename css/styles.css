@@ -1,0 +1,53 @@
+
+
+body{
+    background-color : #ea6153;
+    font-family: 'Staatliches', cursive;
+    height: 100vh;
+}
+
+.gameOver{
+    display:none;
+}
+.game{
+    background:white;
+    width: 70%;
+    height: 50%;;
+    border: 1px solid white;
+    color: #ea6153
+
+}
+.game h1{
+     font-size: 3rem;
+   }
+#gameOn{
+    display: none;
+}
+.question{
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: #ea6153;
+    color: white;
+    padding: 1%;
+    width: 80%;
+    margin:2%  auto;
+}
+#answer{
+    font-family: 'Raleway', sans-serif;
+    font-weight: bolder;
+    width: 80%;
+    padding: .8%;
+    border: 2px solid #ea6153;
+    
+}
+#startButton{
+    font-size: 2rem;
+    width: 30%;
+    background-color: white;
+    border: 2px solid #ea6153;
+    margin: 5%;
+}
+button{
+    color: #ea6153;
+}
