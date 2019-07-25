@@ -10,21 +10,24 @@ function startGame() {
   startTimer();
   addEventListeners();
 }
+
 function removeStartMenu() {
   $('#start-game').css('display', 'none');
 }
+
 function displayGame() {
   $('#gameOn').css('display', 'block');
 }
+
 function resetGame() {
   changeTimeColor("black");
   $('.gameOver').css("display", "none");
   startGame();
 }
+
 function displayQuestion() {
   let question = questionsAndAnswers.questions[pointer];
   $('h3').html(`Q${pointer + 1}) ${question}`);
-
 }
 
 function addEventListeners() {
@@ -56,16 +59,18 @@ function addEventListeners() {
 
   });
 }
+
 function removeEventListener() {
   $('#submit').off('click');
   $('input').off('keypress');
   $('#next').off('click');
   $('#previous').off('click')
 }
+
 function storeAnswer() {
   player.answers[pointer] = $('#answer').val();
-
 }
+
 function displayStoredAnswerOfPlayer() {
   $('#answer').val(player.answers[pointer]);
 }
@@ -73,21 +78,20 @@ function displayStoredAnswerOfPlayer() {
 function incrementPointer() {
   if (pointer < questionsAndAnswers.questions.length - 1) {
     pointer++;
-
   }
 }
+
 function decreamentPointer() {
   if (pointer > 0) {
     --pointer;
-
   }
 }
 
 function getResults() {
   let result = matchAnswers();
   displayResult(result);
-
 }
+
 function displayResult([correctAnswers, wrongAnswers]) {
   endGame();
   addResult();
@@ -96,12 +100,15 @@ function displayResult([correctAnswers, wrongAnswers]) {
   $('.gameOver h5 .wrong').text(wrongAnswers);
   $('.gameOver h5 .time').text(`${pad(60 - seconds, 2)} seconds`);
 }
+
 function endGame() {
   $('#gameOn').css('display', 'none');
 }
+
 function addResult() {
   $('.gameOver').css('display', 'block');
 }
+
 function matchAnswers() {
   let correctAnswers = 0;
   let wrongAnswers = 0;
@@ -124,7 +131,6 @@ function startTimer() {
   if (seconds == 0) {
     stopTimer();
     gameOver();
-
     return
   }
   else if (seconds <= 5) {
@@ -137,6 +143,7 @@ function startTimer() {
   window.timer = setTimeout(startTimer, 1000);
   $('.timer span').text(`00: ${pad(seconds, 2)}`)
 }
+
 function gameOver() {
   removeEventListener();
   getResults();
@@ -147,12 +154,12 @@ function pad(n, width, z) {
   n = n + '';
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
-function resetTimer() {
-  seconds = 15;
-}
+
+
 function changeTimeColor(color) {
   $('.timer span').css('color', color);
 }
+
 function stopTimer() {
   clearTimeout(window.timer);
 }
