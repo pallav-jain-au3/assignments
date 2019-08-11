@@ -1,67 +1,72 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
 const app = express();
+const hbs = require('hbs');
+const port = 8080;
+const userTweets = require('./data/tweets.json');
+const users = require('./data/users.json');
+const bodyParser = require('body-parser');
+const session = require('express-session')
 
-var tweets = [{
-        name: "digitizer",
-        tweet: "This is a cool piece of information."
-    },
-    {name: "M0SH",
-        tweet: "@digitizer I agree."
+app.use(express.static('public'));
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
+
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+
+app.set('view engine', 'hbs');
+
+
+app.get('/', function (req, res) {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+    } else {
+        res.render('tweets.hbs', {
+            title: "Tweets",
+            tweets: userTweets
+        })
     }
-];
-
-
-app.use('/', express.static(path.join(__dirname, 'public')))
-
-
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/public/html/index.html')
 });
 
-app.get('/getTweets', function (req, res) {
-    res.json(tweets)
+
+app.get('/login', function (req, res) {
+    res.render('login.hbs', {
+        title: "Login Page",
+    })
 });
 
-app.use('/add-tweet', bodyParser.json());
 
-app.post('/add-tweet', function (req, res) {
-    console.log(req.body)
-    tweets.push(req.body);
-    res.json({Sucees: req.body.name  + "tweeted" })
-});
-
-app.put('/add-tweet/:name', function(req, res){
-   console.log(req.body)
- let index ;
- for (let i = 0; i < tweets.length; i++){
-     if(req.body.name.toLowerCase() === tweets[i].name.toLowerCase()){
-         index = i;
-         break;
-     }
- }
-   tweets[index].tweet = req.body.tweet;
-   res.json({Sucess: req.body.name + "is updated"})
-
-});
-
-app.delete('/delete-tweet/:name', function(req, res){
-    let index ;
-    for (let i = 0; i < tweets.length; i++){
-        if(req.params.name.toLowerCase() === tweets[i].name.toLowerCase()){
-            index = i;
+app.post('/auth', function (req, res) {
+    let isValid = false;
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].username == req.body.username && users[i].password == req.body.password) {
+            isValid = true;
             break;
         }
     }
-      tweets.splice(index, 1);
-      res.json({Sucess: req.params.name + "is deleted"})
-   
-   });
+    if (isValid) {
+        req.session.loggedIn = true;
+        res.redirect('/');
+    } else {
+        res.redirect('/login')
+    }
 
-
-
-
-app.listen(8080, function () {
-    console.log("Listening on localhost:8080")
 });
+
+
+app.get('/logout', function(req, res){
+    req.session.destroy();
+    res.redirect('/')
+})
+
+
+
+app.listen(port, function () {
+    console.log('Listenning on port' + port);
+})

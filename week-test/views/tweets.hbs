@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/css/tweets.css">
+<div id="logout">
+   <a href="/logout" class="btn btn-light bg-light">logout</a>
+</div>
+<div>
+    <ul>
+        {{#each tweets}}
+        <li class="shadow-sm"><h5>
+            {{this.name}}
+        </h5>
+        <p>{{this.tweet}}</p></li>
+        {{/each}}
+
+  </ul>
+
+</div>
