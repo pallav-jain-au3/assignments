@@ -1,0 +1,15 @@
+li{
+    list-style: none;
+    padding: 2% 1%;
+    background: white;
+    margin: 2rem;
+}
+li h5{
+    color: #64c4ed;
+}
+#logout{
+    position: absolute;
+    z-index: 2;
+    top: 1.5rem;
+    right: 2rem;
+}

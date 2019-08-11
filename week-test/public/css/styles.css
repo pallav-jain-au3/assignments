@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Bitter&display=swap');
+
+h1 {
+    color: #007bff;
+}
+
+body {
+    background: #BADA55;
+    font-family: 'Bitter', serif;
+}
+
+li {
+    background: white;
+    margin-bottom: 2rem;
+    list-style: none;
+    padding: .5% 2%;
+}
+
+li h4 {
+    color: #007bff;
+    font-size: 1rem;
+}
+
+li p {
+    font-size: .8rem;
+    /* display: none; */
+}
+
+input {
+    width: 43%;
+}
+
+.delete,
+.edit,
+.save {
+    font-size: .8rem;
+    background: white;
+    border: none;
+    color: #007bff;
+}
+
+.delete:hover,
+.edit:hover,
+.save:hover {
+    color: #BADA55;
+}
+
+.edit-form {
+    display: none;
+}
+
+.edit-form input {
+    width: 100%;
+    border: none;
+
+}
+
+.save {
+    left: 56px;
+    position: relative;
+    top: 26px;
+    font-size: 0.9rem;
+}

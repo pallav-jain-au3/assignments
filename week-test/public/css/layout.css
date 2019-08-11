@@ -1,0 +1,19 @@
+body{
+    background: #faf5ef;
+}
+header{
+    width: 100%;
+    padding: 1%;
+    background:  #64c4ed;
+    color : white;
+}
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color:  #64c4ed;
+    color: white;
+    text-align: center;
+    padding: 1% 0;
+}
